@@ -1,0 +1,68 @@
+{
+  "segmentationGroupRef" : "AWSTransformAdvisor",
+  "name" : "AWS Transform: Advisor for .Net Applications",
+  "description" : "This dashboard recommends the waves of legacy C# applications to migrate to .Net Core. Recommendations are based on various insights such as the technology (C#), the .Net version, application size in LOC, number of 3rd party OSS dependencies, the presence of Web UI projects (like Razor views or WebForms ASPX files).",
+  "segments" : [ {
+    "segmentRef" : "AWSTransformAdvisor_Wave1",
+    "name" : "Wave 1 - Ideal Candidates",
+    "description" : "Meet all pre-requisites of AWS Transform: C#, .Net framework from 3.5 to 4.8, no Web UI, less than 2M LOC, few 3rd party OSS dependencies.",
+    "color" : "#03CEA4",
+    "matchingRules" : [ {
+      "description" : "Legacy C# Applications with no Asp.NET in .Net Framework from 3.5 to 4.8, with less than 2M LOC and with less than 50 dependencies to 3rd party OSS components.     (100pts)",
+      "formula" : "technologies =in= (CSHARP) and technologies =out= (ASPDOTNET) and SCA:count <= 50 and LOC <= 2000000 and (Keyword:.Net Version Checks:.Net Framework v3.5:match == true or Keyword:.Net Version Checks:.Net Framework v4.0:match == true or Keyword:.Net Version Checks:.Net Framework v4.5:match == true or Keyword:.Net Version Checks:.Net Framework v4.6:match == true or Keyword:.Net Version Checks:.Net Framework v4.7:match == true or Keyword:.Net Version Checks:.Net Framework v4.8:match == true)",
+      "points" : 100
+    }
+	]
+  }, {
+    "segmentRef" : "AWSTransformAdvisor_Wave2",
+    "name" : "Wave 2 - Good Candidates",
+    "description" : "Meet most of pre-requisites of AWS Transform (except the absence of Web UI components): C#, .Net framework from 3.5 to 4.8, less than 2M LOC, few 3rd party OSS dependencies..",
+    "color" : "#2280BF",
+    "matchingRules" : [ {
+      "description" : "Legacy C# applications in .Net Framework from 3.5 to 4.8 with less than 2M LOC and with less than 50 dependencies to 3rd party OSS components.     (75pts)",
+      "formula" : "technologies =in= (CSHARP) and SCA:count <= 50 and LOC <= 2000000 and (Keyword:.Net Version Checks:.Net Framework v3.5:match == true or Keyword:.Net Version Checks:.Net Framework v4.0:match == true or Keyword:.Net Version Checks:.Net Framework v4.5:match == true or Keyword:.Net Version Checks:.Net Framework v4.6:match == true or Keyword:.Net Version Checks:.Net Framework v4.7:match == true or Keyword:.Net Version Checks:.Net Framework v4.8:match == true)",
+      "points" : 75
+    } ]
+  }, {
+    "segmentRef" : "AWSTransformAdvisor_Wave3",
+    "name" : "Wave 3 - Fair candidates on upgradable .Net Core version",
+    "description" : "C# applications in an Upgradable .Net Core version (up to .NET 7).",
+    "color" : "#185D8B",
+    "matchingRules" : [ {
+      "description" : "Legacy C# Applications in .Net Core, .Net Unified (up to 7.0) or in Net Standard with less than 2M LOC and with less than 50 dependencies to 3rd party OSS components.     (50pts)",
+      "formula" : "technologies =in= (CSHARP) and LOC <= 2000000 and (Keyword:.Net Version Checks:.Net Core 1.0:match == true or Keyword:.Net Version Checks:.Net Core 1.1:match == true or Keyword:.Net Version Checks:.Net Core 2.0:match == true or Keyword:.Net Version Checks:.Net Core 2.1:match == true or Keyword:.Net Version Checks:.Net Core 2.2:match == true or Keyword:.Net Version Checks:.Net Core 3.0:match == true or Keyword:.Net Version Checks:.Net Core 3.1:match == true or Keyword:.Net Version Checks:.Net Standard 1.0:match == true or Keyword:.Net Version Checks:.Net Standard 1.1:match == true or Keyword:.Net Version Checks:.Net Standard 1.2:match == true or Keyword:.Net Version Checks:.Net Standard 1.3:match == true or Keyword:.Net Version Checks:.Net Standard 1.4:match == true or Keyword:.Net Version Checks:.Net Standard 1.5:match == true or Keyword:.Net Version Checks:.Net Standard 1.6:match == true or Keyword:.Net Version Checks:.Net Standard 2.0:match == true or Keyword:.Net Version Checks:.Net Standard 2.1:match == true or Keyword:.Net Version Checks:.NET 5:match == true or Keyword:.Net Version Checks:.NET 6:match == true or Keyword:.Net Version Checks:.NET 7:match == true)",
+      "points" : 50
+    } ]
+  }, {
+    "segmentRef" : "AWSTransformAdvisor_Wave4",
+    "name" : "Wave 4 - Complex Candidates Requiring Additional Efforts",
+    "description" : "Legacy C# applications with more than 50 dependencies..",
+    "color" : "#185D8B",
+    "matchingRules" : [ {
+      "description" : "Legacy C# Applications in .Net Framework from 3.5 to 4.8 with less than 2M LOC and with more than 50 dependencies.     (75pts)",
+      "formula" : "technologies =in= (CSHARP) and SCA:count > 50 and LOC <= 2000000 and (Keyword:.Net Version Checks:.Net Framework v3.5:match == true or Keyword:.Net Version Checks:.Net Framework v4.0:match == true or Keyword:.Net Version Checks:.Net Framework v4.5:match == true or Keyword:.Net Version Checks:.Net Framework v4.6:match == true or Keyword:.Net Version Checks:.Net Framework v4.7:match == true or Keyword:.Net Version Checks:.Net Framework v4.8:match == true)",
+      "points" : 75
+    } ]
+  }, {
+    "segmentRef" : "AWSTransformAdvisor_Wave5",
+    "name" : "Wave 5 - Not Yet Supported",
+    "description" : "Extra Large or very old C# applications.",
+    "color" : "#96CAED",
+    "matchingRules" : [ {
+      "description" : "C# applications in .Net Framework 1.0 to 3.0 or C# applications with more 2M LOC or .Net Core C# applications with more than 50 dependencies     (100pts)",
+      "formula" : "technologies =in= (CSHARP) and ((Keyword:.Net Version Checks:.Net Framework v1.0:match == true and Keyword:.Net Version Checks:.Net Framework v1.1:match == true and Keyword:.Net Version Checks:.Net Framework v2.0:match == true and Keyword:.Net Version Checks:.Net Framework v3.0:match == true) or LOC > 2000000)",
+      "points" : 100
+    } ]
+  }, {
+    "segmentRef" : "AWSTransformAdvisor_Wave6",
+    "name" : "Not C# applications or no upgrade required",
+    "description" : "Not C# applications or C# applications in latest .Net versions.",
+    "color" : "#DDDDDD",
+    "matchingRules" : [ {
+      "description" : "Applications not developed in C# or C# applications in NET 8 or NET 9.    (25pts)",
+      "formula" : "technologies =out= (CSHARP) or (technologies =in= (CSHARP) and (Keyword:.Net Version Checks:.NET 8:match == true or Keyword:.Net Version Checks:.NET 9:match == true or Keyword:.Net Version Checks:match == false))",
+      "points" : 25
+    } ]
+  } ],
+  "segmentationStatus" : "production"
+}
