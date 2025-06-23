@@ -3,7 +3,7 @@
 This Python script automatically extracts the recommendations from "AWS Transform: Advisor for .Net Applications" into JSON files. It will generate one JSON file with all the recommended waves and one JSON file per wave.
 Those JSON files follow a format that will allow users to upload them directly in AWS Transform to help selecting the .Net repositories to be automatically upgraded in the latest .Net version.    
 
-This script just takes as an input aa token to connect to a CAST Highlight account.
+This script just takes as an input a token to connect to a CAST Highlight account.
 The default CAST Highlight URL is https://rpa.casthighlight.com, but you can select another one like ,https://cloud.casthighlight.com or https://app.casthighlight.com 
 
 ## Analysis Pre-requisites
@@ -23,12 +23,13 @@ The default CAST Highlight URL is https://rpa.casthighlight.com, but you can sel
 ## ⚙️ Installation
 
 ### 0. Pre-requisites
-Python 3.13.3 (Python 3.09 and 3.10 not supported)
+Python 3.13.3 or later (Python 3.09 and 3.10 not supported)
 
 ### 1. Set up the virtual environment
 
 ```bash
 python -m venv venv
+
 source venv/bin/activate      # macOS / Linux
 venv\Scripts\activate         # Windows
 ```
