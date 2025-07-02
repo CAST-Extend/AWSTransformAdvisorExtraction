@@ -27,7 +27,7 @@ class PathManager:
     def paths(self) -> Dict[str, str]:
         return {
             'log_dir': self.get_path('log'),
-            'segmentation_json_file': self.get_path('AmazonQCT_Wave_Advisor_final.1.0.json'),
+            'segmentation_json_file': self.get_path('AWSTransform_Wave_Advisor_final.2.0.json'),
             'results_dir': self.get_path('results')
         }
         
@@ -119,7 +119,7 @@ class CastApiClient:
             if data.get("id"):
                 segmentation_id = data.get("id")
                 if segmentation_id:
-                    logger.info(f'Amazon Q Code Transform Segmentation created in CAST Highlight: {segmentation_id}')
+                    logger.info(f'AWS Transform Segmentation created in CAST Highlight: {segmentation_id}')
                     list_segments = []
                     segments = data.get("segments", [])
                     for wave in segments:
@@ -132,11 +132,11 @@ class CastApiClient:
                         list_segments.append(wave_definition)
                     return segmentation_id, list_segments
 
-            logger.error(f"Amazon Q Code Transform Segmentation creation failed.")
+            logger.error(f"AWS Transform Segmentation creation failed.")
             return None
 
         except Exception as e:
-            logger.error(f"Failed to create Amazon Q Code Transform Segmentation: {str(e)}")
+            logger.error(f"Failed to create AWS Transform Segmentation: {str(e)}")
             return None
 
     def compute_segmentation(self, segmentation_id: int) -> Optional[List]:
@@ -154,7 +154,7 @@ class CastApiClient:
 
             data = response.json()
             if len(data) > 0:
-                logger.info(f'Amazon Q Code Transform Segmentation computed successfully in CAST Highlight: {len(data)} applications in segments.')
+                logger.info(f'AWS Transform Segmentation computed successfully in CAST Highlight: {len(data)} applications in segments.')
                 result = {}
                 for key, id_value in data.items():
                     if id_value not in result:

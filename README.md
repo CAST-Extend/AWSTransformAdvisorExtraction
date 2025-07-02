@@ -19,7 +19,7 @@ The default CAST Highlight URL is https://rpa.casthighlight.com, but you can sel
 ![img.png](HomeCodeReader.png)
 
 #### 3. Go to the _Miscellaneous Options_ tab, select the "cast.keyword.dotnet.xml" for the _Add KeyWord Scan Config_ option
-_.Net Version Check_ extension : https://doc.casthighlight.com/extensions/download.php?identifier=cast.keyword.dotnet
+_.Net Version Check_ extension : https://doc.casthighlight.com/extensions/download.php?identifier=cast.keyword.dotnet  
 ![img.png](Miscellaneous.png)
 
 #### 4. Activate the _Upload Scan Results_ option, enter the login credentials to the CAST Highlight instance (Easy Authentication or Advanced Authentication) and click on _Sign In_
